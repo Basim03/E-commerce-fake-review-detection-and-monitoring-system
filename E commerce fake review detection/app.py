@@ -10,6 +10,8 @@ warnings.filterwarnings('ignore')
 from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
 import nltk
+# import nltk/
+nltk.download('stopwords')
 from nltk.corpus import stopwords
 from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
 from sklearn.naive_bayes import MultinomialNB
@@ -22,6 +24,8 @@ from sklearn.linear_model import LogisticRegression
 from flask import url_for
 
 app = Flask(__name__)
+
+
 
 def text_process(review):
     nopunc = [char for char in review if char not in string.punctuation]
