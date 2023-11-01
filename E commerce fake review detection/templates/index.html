@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/static/style.css">
+ 
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Fake Review Detector</h1>
+        <form id="review-form" method="post" action="/analyze_review">
+            <label for="review_text">Enter your review:</label>
+            <textarea name="review_text" id="review_text" required></textarea>
+            <button type="submit">Analyze Review</button>
+        </form>
+        <div id="result"></div>
+    </div>
+</body>
+</html>
