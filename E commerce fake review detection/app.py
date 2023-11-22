@@ -32,7 +32,7 @@ def text_process(review):
     nopunc = ''.join(nopunc)
     return [word for word in nopunc.split() if word.lower() not in stopwords.words('english')]
 # Load your trained fake review detection model
-model=pickle.load(open('model/pipeline.pkl','rb'))
+model=pickle.load(open('C:/Users/asmee/Documents/GitHub/E-commerce-fake-review-detection-and-monitoring-system/E commerce fake review detection/model/pipeline.pkl','rb'))
 
 
 
@@ -48,6 +48,9 @@ def route_to_index():
 
 
 # Define a route to handle review submission and analysis
+# Your Python code
+from flask import render_template
+
 @app.route('/analyze_review', methods=['POST'])
 def analyze_review():
     if request.method == 'POST':
@@ -62,6 +65,7 @@ def analyze_review():
             result = "This review appears to be genuine."
 
         return result
+
 
 if __name__ == '__main__':
     app.run(debug=True)

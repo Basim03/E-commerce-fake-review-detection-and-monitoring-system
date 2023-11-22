@@ -1,11 +1,11 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="/static/style.css">
- 
-    <title>Document</title>
+    <title>Fake Review Detector</title>
 </head>
 <body>
     <div class="background">
@@ -17,9 +17,50 @@
         <form id="review-form" method="post" action="/analyze_review">
             <label for="review_text">Enter your review:</label>
             <textarea name="review_text" id="review_text" required></textarea>
-            <button type="submit">Analyze Review</button>
+            <button type="button" onclick="analyzeReview()">Analyze Review</button>
         </form>
-        <div id="result"></div>
+
+        
     </div>
+
+    <!-- Result Modal -->
+    <div id="resultModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div id="result"></div>
+        </div>
+    </div>
+
+    <script>
+        function analyzeReview() {
+            // Use AJAX to submit the form data without reloading the page
+            var formData = new FormData(document.getElementById('review-form'));
+            var xhr = new XMLHttpRequest();
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        // Display the result in the modal
+                        document.getElementById('result').innerHTML = xhr.responseText;
+                        openModal();
+                    } else {
+                        console.error('Error:', xhr.status, xhr.statusText);
+                    }
+                }
+            };
+
+            xhr.open('POST', '/analyze_review', true);
+            xhr.send(formData);
+        }
+
+        function openModal() {
+            document.getElementById('resultModal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('resultModal').style.display = 'none';
+        }
+    </script>
 </body>
 </html>
+
